@@ -1,0 +1,47 @@
+{
+  "name" : "job_eg_sales_cube_v0-3copy",
+  "jobMode" : "SCRIPT",
+  "description" : "",
+  "role" : "arn:aws:iam::488901550770:role/AWS-Glue-and-S3-Role",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 2
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-488901550770-eu-central-1/scripts/job_eg_sales_cube_v0-3copy.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--SOURCE_SECRET_NAME" : "dev/snapshot/magentoeg",
+    "--TempDir" : "s3://aws-glue-assets-488901550770-eu-central-1/temporary/",
+    "--REDSHIFT_SECRET_NAME" : "prod/redshift/egypt",
+    "--enable-metrics" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-488901550770-eu-central-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--RUNNING_TO" : "01062023",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--REDSHIFT_TEMP" : "s3://aws-glue-redshift-temp-eg",
+    "--job-language" : "python",
+    "--enable-auto-scaling" : "true",
+    "--RUNNING_FROM" : "01012023"
+  },
+  "connections" : {
+    "connections" : [ "magento_eg_conn", "magento_ksa_conn", "redshift_conn" ]
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 5,
+  "timeout" : 240,
+  "maxCapacity" : 5.0,
+  "glueVersion" : "3.0",
+  "numberOfWorkers" : 5,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "Homzmert",
+    "branch" : "main",
+    "folder" : "job_eg_sales_cube_v0-3copy"
+  }
+}
